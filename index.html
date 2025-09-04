@@ -18,6 +18,7 @@
             align-items: center;
             min-height: 100vh;
             padding: 2rem;
+            box-sizing: border-box; /* Ensures padding doesn't cause overflow */
         }
         .container {
             max-width: 900px;
@@ -56,7 +57,6 @@
             line-height: 1.6;
             margin-bottom: 1rem;
         }
-
         /* Combined Visual and Text Section */
         .value-section-container {
             display: flex;
@@ -64,31 +64,32 @@
             gap: 2rem;
             align-items: center;
         }
-        
         .visual-container {
-            flex: 1;
             display: flex;
             justify-content: center;
             align-items: flex-end;
             gap: 4rem;
-            height: 300px;
             padding-top: 2rem;
+            width: 100%; /* Make container full width */
         }
         .value-stack {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
+            min-width: 120px;
         }
         .offensive-stack .value-block {
-            width: 100px;
+            width: 100%;
+            max-width: 100px; /* Constrain max width on large screens */
             background-color: #FFB81C;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             animation: growOffensive 1s ease-out forwards;
         }
         .defensive-stack .value-block {
-            width: 100px;
+            width: 100%;
+            max-width: 100px; /* Constrain max width on large screens */
             background-color: #6F263D;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -103,39 +104,26 @@
             font-size: 1.25rem;
             font-weight: bold;
         }
-        @keyframes growOffensive {
-            from { height: 0; }
-            to { height: 200px; }
-        }
-        @keyframes growDefensive {
-            from { height: 0; }
-            to { height: 50px; }
-        }
-
         .summary-text-container {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
-
         .summary-block {
             padding: 1rem 0;
             text-align: center;
         }
-
         .summary-title {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
-
         .offensive-color {
             color: #FFB81C;
         }
         .defensive-color {
             color: #6F263D;
         }
-
         /* Player Examples Section */
         .player-examples {
             display: flex;
@@ -144,16 +132,17 @@
         }
         .player-list {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             gap: 1rem;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Allows cards to wrap on new line */
         }
         .player-card {
             background-color: #2C2C2C;
             border-radius: 0.75rem;
             padding: 1rem;
             text-align: center;
-            width: 160px;
+            width: calc(50% - 1rem); /* Two cards per row on mobile */
+            max-width: 160px; /* Max width on larger screens */
         }
         .player-name {
             font-weight: bold;
@@ -163,11 +152,10 @@
             font-size: 0.9rem;
             color: #94a3b8;
         }
-        
         /* New section styles */
         .chart-card {
-            background-color: #2C2C2C; /* Use a consistent dark color */
-            color: #e2e8f0; /* Ensure text is visible */
+            background-color: #2C2C2C;
+            color: #e2e8f0;
             border-radius: 1rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             padding: 2.5rem;
@@ -176,40 +164,73 @@
             flex-direction: column;
             align-items: center;
         }
-
+        /* Make images responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        @keyframes growOffensive {
+            from { height: 0; }
+            to { height: 200px; }
+        }
+        @keyframes growDefensive {
+            from { height: 0; }
+            to { height: 50px; }
+        }
+        /* Animations for Guard/Wing section */
+        @keyframes growGuardOffensive {
+            from { height: 0; }
+            to { height: 750px; }
+        }
+        @keyframes growGuardDefensive {
+            from { height: 0; }
+            to { height: 50px; }
+        }
+        /* Mobile-specific styles */
         @media (max-width: 640px) {
-            .value-comparison {
-                flex-direction: column;
+            body {
+                padding: 1rem; /* Less padding on small screens */
+            }
+            .container {
+                padding: 1rem;
+            }
+            .title {
+                font-size: 2.5rem; /* Smaller title on mobile */
+            }
+            .subtitle {
+                font-size: 1rem; /* Smaller subtitle */
+            }
+            .visual-container {
+                flex-direction: column; /* Stack bars vertically */
                 height: auto;
-                align-items: center;
                 gap: 2rem;
             }
             .value-stack {
                 width: 100%;
-                flex-direction: row;
-                justify-content: center;
-                gap: 1rem;
-                align-items: flex-end;
-            }
-            .offensive-stack .value-block,
-            .defensive-stack .value-block {
-                width: 80px;
-            }
-            .value-label {
-                order: -1;
-            }
-            .player-list {
                 flex-direction: column;
+                justify-content: center;
+                gap: 0.5rem;
                 align-items: center;
             }
+            .offensive-stack .value-block {
+                height: 150px; /* Adjusted height for mobile for better spacing */
+            }
+            .defensive-stack .value-block {
+                height: 38px; /* Adjusted height for mobile for better spacing */
+            }
+            .offensive-stack .value-block.guard {
+                height: 250px; /* Adjusted height for mobile */
+            }
+            .defensive-stack .value-block.guard {
+                height: 16px; /* Adjusted height for mobile */
+            }
             .player-card {
-                width: 80%;
+                width: 80%; /* Single column on very small screens */
             }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
         <header class="section">
             <h1 class="title">The Cost to Buy Wins in the NBA</h1>
@@ -227,21 +248,19 @@
         <section class="section">
             <h2 class="text-4xl font-bold text-center mb-6">The Market Price of a Single Win Produced</h2>
             <div class="summary-block offensive-color">
-                    <h3 class="summary-title">Over the last five seasons, a win produced was worth $2.45M. But not all wins have been compensated equally.</h3>
-                    <p class="text-2xl text-gray-400">Offensive wins have cost roughly <b>4 times</b> as much money to buy as defensive wins.</p>
-                </div>
+                <h3 class="summary-title">Over the last five seasons, a win produced was worth $2.45M. But not all wins have been compensated equally.</h3>
+                <p class="text-2xl text-gray-400">Offensive wins have cost roughly <b>4 times</b> as much money to buy as defensive wins.</p>
+            </div>
             <div class="value-section-container">
                 <div class="visual-container">
-                    <!-- Offensive Value Stack -->
                     <div class="value-stack offensive-stack">
-                        <div class="value-block h-[200px]"></div>
+                        <div class="value-block" style="height: 200px;"></div>
                         <span class="value-label offensive-color">$1,901,000</span>
                         <span class="price-label offensive-color">Offensive Win</span>
                     </div>
                     
-                    <!-- Defensive Value Stack -->
                     <div class="value-stack defensive-stack">
-                        <div class="value-block h-[50px]"></div>
+                        <div class="value-block" style="height: 50px;"></div>
                         <span class="value-label defensive-color">$469,000</span>
                         <span class="price-label defensive-color">Defensive Win</span>
                     </div>
@@ -264,21 +283,19 @@
         <section class="section">
             <h2 class="text-4xl font-bold text-center mb-6">Teams Underrate Defense for Guards and Wings</h2>
             <div class="summary-block offensive-color">
-                    <h3 class="summary-title">Bigs tend to rate slightly better defensively, and they tend to be underpaid. But this does NOT explain the offense/defense discrepancy.</h3>
-                    <p class="text-2xl text-gray-400">In fact, when looking at just guards and wings, they are paid <b>15 times</b> as much money for their offensive contributions as their defense.</p>
-                </div>
+                <h3 class="summary-title">Bigs tend to rate slightly better defensively, and they tend to be underpaid. But this does NOT explain the offense/defense discrepancy.</h3>
+                <p class="text-2xl text-gray-400">In fact, when looking at just guards and wings, they are paid <b>15 times</b> as much money for their offensive contributions as their defense.</p>
+            </div>
             <div class="value-section-container">
                 <div class="visual-container">
-                    <!-- Offensive Value Stack -->
                     <div class="value-stack offensive-stack">
-                        <div class="value-block h-[750px]"></div>
+                        <div class="value-block guard" style="height: 750px;"></div>
                         <span class="value-label offensive-color">$2,023,000</span>
                         <span class="price-label offensive-color">Guard/Wing Offensive Win</span>
                     </div>
                     
-                    <!-- Defensive Value Stack -->
                     <div class="value-stack defensive-stack">
-                        <div class="value-block h-[50px]"></div>
+                        <div class="value-block guard" style="height: 50px;"></div>
                         <span class="value-label defensive-color">$133,500</span>
                         <span class="price-label defensive-color">Guard/Wing Defensive Win</span>
                     </div>
@@ -330,10 +347,5 @@
             <p>Data analysis based on player salaries and WAR (Wins Above Replacement).</p>
         </footer>
     </div>
-
 </body>
 </html>
-
-
-
-
