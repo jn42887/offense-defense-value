@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Buy Wins</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0C0C; /* Dark Black */
+            color: #cbd5e1; /* Light Gray */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: #181818; /* Lighter Black */
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .section {
+            border-bottom: 2px solid #2C2C2C; /* Dark Gray for borders */
+            padding-bottom: 2rem;
+        }
+        .section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .title {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #cbd5e1; /* Light Gray for title */
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #94a3b8; /* Slightly darker gray */
+            margin-bottom: 2rem;
+        }
+        .card {
+            background-color: #2C2C2C; /* Card background */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+        }
+        .card-title {
+            font-size: 2.0rem;
+            font-weight: 700;
+            color: #e2e8f0;
+        }
+        .card-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .offensive-color {
+            color: #FFB81C; /* True Gold */
+        }
+        .defensive-color {
+            color: #6F263D; /* Wine */
+        }
+        .icon {
+            width: 64px;
+            height: 64px;
+        }
+        .text-section p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        /* Bar chart styles */
+        .value-comparison {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 4rem;
+            height: 300px;
+            padding-top: 2rem;
+        }
+        .value-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .offensive-stack .value-block {
+            width: 100px;
+            background-color: #FFB81C;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            animation: growOffensive 1s ease-out forwards;
+        }
+        .defensive-stack .value-block {
+            width: 100px;
+            background-color: #6F263D;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            animation: growDefensive 1s ease-out forwards;
+        }
+        
+        .value-label {
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .price-label {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        @keyframes growOffensive {
+            from { height: 0; }
+            to { height: 200px; }
+        }
+        @keyframes growDefensive {
+            from { height: 0; }
+            to { height: 50px; }
+        }
+
+        /* Player Examples Section */
+        .player-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .player-list {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .player-card {
+            background-color: #2C2C2C;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            width: 160px;
+        }
+        .player-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .player-value {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 640px) {
+            .value-comparison {
+                flex-direction: column;
+                height: auto;
+                align-items: center;
+                gap: 2rem;
+            }
+            .value-stack {
+                width: 100%;
+                flex-direction: row;
+                justify-content: center;
+                gap: 1rem;
+                align-items: flex-end;
+            }
+            .offensive-stack .value-block,
+            .defensive-stack .value-block {
+                width: 80px;
+            }
+            .value-label {
+                order: -1;
+            }
+            .player-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            .player-card {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="section">
+            <h1 class="title">The Cost to Buy Wins in the NBA</h1>
+            <p class="subtitle">A Data-Driven Analysis of Offensive vs. Defensive Wins</p>
+        </header>
+
+        <section class="section">
+            <div class="text-section">
+                <p>There is a clear correlation between how good players are and how much they get paid. But as it turns out, salaries reflect mostly only offensive value.</p>
+                <p>By using a multiple linear regression model on player salary and their Offensive and Defensive Wins Above Replacement (WAR), we can determine the marginal "market price" for an extra win in each category.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="text-4xl font-bold text-center mb-6">The Market Price of a Single Win Produced</h2>
+            
+            <div class="value-comparison">
+                <!-- Offensive Value Stack -->
+                <div class="value-stack offensive-stack">
+                    <div class="value-block h-[200px]"></div>
+                    <span class="value-label offensive-color">$1,901,000</span>
+                    <span class="price-label offensive-color">Offensive Win</span>
+                </div>
+                
+                <!-- Defensive Value Stack -->
+                <div class="value-stack defensive-stack">
+                    <div class="value-block h-[50px]"></div>
+                    <span class="value-label defensive-color">$469,000</span>
+                    <span class="price-label defensive-color">Defensive Win</span>
+                </div>
+            </div>
+
+            <div class="text-section mt-8">
+                <p class="text-center font-semibold">The market for offensive wins is a premium market, while you can acquire defensive wins at a significant discount.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="text-4xl font-bold text-center mb-6">A Clear Competitive Advantage</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Offensive Card -->
+                <div class="card offensive-color">
+                    <svg class="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5V13H8l5-6.5V11h3l-5 6.5z"/>
+                    </svg>
+                    <div class="card-title">OFFENSE: THE PREMIUM MARKET</div>
+                    <div class="card-value">$1,901,000 Spent Per Win Produced</div>
+                    <p class="text-sm text-gray-400">The average salary increase for each additional offensive win produced.</p>
+                </div>
+                <!-- Defensive Card -->
+                <div class="card defensive-color">
+                    <svg class="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-12.24l-4.24 4.24 1.41 1.41L12 11.17l5.83 5.84 1.41-1.41-7.24-7.24z"/>
+                    </svg>
+                    <div class="card-title">DEFENSE: THE VALUE MARKET</div>
+                    <div class="card-value">$469,000 Spent Per Win Produced</div>
+                    <p class="text-sm text-gray-400">The average salary increase for each additional defensive win produced.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 card">
+                <h1 class="text-4xl font-bold text-[#000000] mb-4">How Players Have Been Paid</h2>
+                <p class="text-gray-600 mb-6">
+                    This chart shows how players have been paid over the last five seasons, based on either their offensive or defensive percentile (rookie scale contracts excluded). As shown in the chart, as players get better offensively, their salary rises accordingly. But on the defensive end, there is a very small gap in salary between the best defensive players and the worst ones.
+                </p>
+                <div class="flex flex-col items-center">
+                    <img src="Average Salary by Offensive or Defensive Percentile.png" alt="Average Salary by Offensive or Defensive Percentile">
+                </div>
+            </div>
+        </section>    
+
+
+        <footer class="text-center text-sm text-gray-500 mt-4">
+            <p>Data analysis based on player salaries and WAR (Wins Above Replacement).</p>
+        </footer>
+    </div>
+
+</body>
+</html>
