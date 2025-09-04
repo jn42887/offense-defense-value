@@ -51,43 +51,22 @@
             color: #94a3b8; /* Slightly darker gray */
             margin-bottom: 2rem;
         }
-        .card {
-            background-color: #2C2C2C; /* Card background */
-            border-radius: 1rem;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 1rem;
-        }
-        .card-title {
-            font-size: 2.0rem;
-            font-weight: 700;
-            color: #e2e8f0;
-        }
-        .card-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-        .offensive-color {
-            color: #FFB81C; /* True Gold */
-        }
-        .defensive-color {
-            color: #6F263D; /* Wine */
-        }
-        .icon {
-            width: 64px;
-            height: 64px;
-        }
         .text-section p {
             font-size: 1.125rem;
             line-height: 1.6;
             margin-bottom: 1rem;
         }
+
+        /* Combined Visual and Text Section */
+        .value-section-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
         
-        /* Bar chart styles */
-        .value-comparison {
+        .visual-container {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: flex-end;
@@ -115,7 +94,6 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             animation: growDefensive 1s ease-out forwards;
         }
-        
         .value-label {
             font-size: 1.25rem;
             font-weight: bold;
@@ -125,7 +103,6 @@
             font-size: 1.25rem;
             font-weight: bold;
         }
-        
         @keyframes growOffensive {
             from { height: 0; }
             to { height: 200px; }
@@ -135,13 +112,36 @@
             to { height: 50px; }
         }
 
+        .summary-text-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .summary-block {
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .offensive-color {
+            color: #FFB81C;
+        }
+        .defensive-color {
+            color: #6F263D;
+        }
+
         /* Player Examples Section */
         .player-examples {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
-
         .player-list {
             display: flex;
             justify-content: space-around;
@@ -162,6 +162,19 @@
         .player-value {
             font-size: 0.9rem;
             color: #94a3b8;
+        }
+        
+        /* New section styles */
+        .chart-card {
+            background-color: #2C2C2C; /* Use a consistent dark color */
+            color: #e2e8f0; /* Ensure text is visible */
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         @media (max-width: 640px) {
@@ -206,71 +219,112 @@
         <section class="section">
             <div class="text-section">
                 <p>There is a clear correlation between how good players are and how much they get paid. But as it turns out, salaries reflect mostly only offensive value.</p>
-                <p>By using a multiple linear regression model on player salary and their Offensive and Defensive Wins Above Replacement (WAR), we can determine the marginal "market price" for an extra win in each category.</p>
+                <p>By using a multiple linear regression model on player salary and their Offensive and Defensive Wins Above Replacement (WAR), we can determine the marginal "market price" for an extra win produced in each category, based on players' individual contributions on both ends of the floor and how much they're actually getting paid.</p>
             </div>
         </section>
 
         <section class="section">
             <h2 class="text-4xl font-bold text-center mb-6">The Market Price of a Single Win Produced</h2>
-            
-            <div class="value-comparison">
-                <!-- Offensive Value Stack -->
-                <div class="value-stack offensive-stack">
-                    <div class="value-block h-[200px]"></div>
-                    <span class="value-label offensive-color">$1,901,000</span>
-                    <span class="price-label offensive-color">Offensive Win</span>
+            <div class="summary-block offensive-color">
+                    <h3 class="summary-title">Over the last five seasons, a win produced was worth $2.45M. But not all wins have been compensated equally.</h3>
+                    <p class="text-2xl text-gray-400">Offensive wins have cost roughly <b>4 times</b> as much money to buy as defensive wins.</p>
                 </div>
-                
-                <!-- Defensive Value Stack -->
-                <div class="value-stack defensive-stack">
-                    <div class="value-block h-[50px]"></div>
-                    <span class="value-label defensive-color">$469,000</span>
-                    <span class="price-label defensive-color">Defensive Win</span>
+            <div class="value-section-container">
+                <div class="visual-container">
+                    <!-- Offensive Value Stack -->
+                    <div class="value-stack offensive-stack">
+                        <div class="value-block h-[200px]"></div>
+                        <span class="value-label offensive-color">$1,901,000</span>
+                        <span class="price-label offensive-color">Offensive Win</span>
+                    </div>
+                    
+                    <!-- Defensive Value Stack -->
+                    <div class="value-stack defensive-stack">
+                        <div class="value-block h-[50px]"></div>
+                        <span class="value-label defensive-color">$469,000</span>
+                        <span class="price-label defensive-color">Defensive Win</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="text-section mt-8">
-                <p class="text-center font-semibold">The market for offensive wins is a premium market, while you can acquire defensive wins at a significant discount.</p>
+            <div class="summary-text-container mt-8">
+                <div class="summary-block offensive-color">
+                    <h3 class="summary-title">OFFENSE: THE PREMIUM MARKET</h3>
+                    <p class="text-sm text-gray-400">The average salary increase for each additional offensive win produced. This is where teams overspend.</p>
+                </div>
+                <div class="summary-block defensive-color">
+                    <h3 class="summary-title">DEFENSE: THE VALUE MARKET</h3>
+                    <p class="text-sm text-gray-400">The average salary increase for each additional defensive win produced. This represents a significant opportunity for efficient roster building.</p>
+                </div>
+            </div>
+            <h3 class="summary-title"></h3>
+        </section>
+
+        <section class="section">
+            <h2 class="text-4xl font-bold text-center mb-6">Teams Underrate Defense for Guards and Wings</h2>
+            <div class="summary-block offensive-color">
+                    <h3 class="summary-title">Bigs tend to rate slightly better defensively, and they tend to be underpaid. But this does NOT explain the offense/defense discrepancy.</h3>
+                    <p class="text-2xl text-gray-400">In fact, when looking at just guards and wings, they are paid <b>15 times</b> as much money for their offensive contributions as their defense.</p>
+                </div>
+            <div class="value-section-container">
+                <div class="visual-container">
+                    <!-- Offensive Value Stack -->
+                    <div class="value-stack offensive-stack">
+                        <div class="value-block h-[750px]"></div>
+                        <span class="value-label offensive-color">$2,023,000</span>
+                        <span class="price-label offensive-color">Guard/Wing Offensive Win</span>
+                    </div>
+                    
+                    <!-- Defensive Value Stack -->
+                    <div class="value-stack defensive-stack">
+                        <div class="value-block h-[50px]"></div>
+                        <span class="value-label defensive-color">$133,500</span>
+                        <span class="price-label defensive-color">Guard/Wing Defensive Win</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-text-container mt-8">
+                <div class="summary-block offensive-color">
+                    <h3 class="summary-title">OFFENSE: THE PREMIUM MARKET</h3>
+                    <p class="text-sm text-gray-400">Nearly all of guard/wing salaries are determined by their offensive performance.</p>
+                </div>
+                <div class="summary-block defensive-color">
+                    <h3 class="summary-title">DEFENSE: THE VALUE MARKET</h3>
+                    <p class="text-sm text-gray-400">There is very little difference in the salaries between good and bad defensive players, despite wins being just as impactful for guards and wings.</p>
+                </div>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="text-4xl font-bold text-center mb-6">A Clear Competitive Advantage</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Offensive Card -->
-                <div class="card offensive-color">
-                    <svg class="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5V13H8l5-6.5V11h3l-5 6.5z"/>
-                    </svg>
-                    <div class="card-title">OFFENSE: THE PREMIUM MARKET</div>
-                    <div class="card-value">$1,901,000 Spent Per Win Produced</div>
-                    <p class="text-sm text-gray-400">The average salary increase for each additional offensive win produced.</p>
-                </div>
-                <!-- Defensive Card -->
-                <div class="card defensive-color">
-                    <svg class="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-12.24l-4.24 4.24 1.41 1.41L12 11.17l5.83 5.84 1.41-1.41-7.24-7.24z"/>
-                    </svg>
-                    <div class="card-title">DEFENSE: THE VALUE MARKET</div>
-                    <div class="card-value">$469,000 Spent Per Win Produced</div>
-                    <p class="text-sm text-gray-400">The average salary increase for each additional defensive win produced.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 card">
-                <h1 class="text-4xl font-bold text-[#000000] mb-4">How Players Have Been Paid</h2>
-                <p class="text-gray-600 mb-6">
+            <div class="chart-card">
+                <h2 class="text-4xl font-bold mb-4">How Players Have Been Paid</h2>
+                <p class="text-gray-400 mb-6">
                     This chart shows how players have been paid over the last five seasons, based on either their offensive or defensive percentile (rookie scale contracts excluded). As shown in the chart, as players get better offensively, their salary rises accordingly. But on the defensive end, there is a very small gap in salary between the best defensive players and the worst ones.
                 </p>
                 <div class="flex flex-col items-center">
                     <img src="Average Salary by Offensive or Defensive Percentile.png" alt="Average Salary by Offensive or Defensive Percentile">
                 </div>
+            </br>
+                <h3 class="summary-title">The top 250 defenders over the past five seasons have made an average of $18M per season. The top 250 offensive players have made an average of $29M.</h3>
             </div>
-        </section>    
+        </section>
 
-
+        <section class="section">
+            <div class="chart-card">
+                <h2 class="text-4xl font-bold mb-4">Great Teams Collect Great Defenders</h2>
+                <p class="text-2xl text-lightGray">
+                    Projected top 10 teams this year have about 0.4 more very good offensive players (top 25th percentile) than middle 10 teams. But they have <b>2.0</b> more very good defenders.
+                </p>
+            </br>
+                <div class="flex flex-col items-center">
+                    <img src="Good Players by Team Tier.png" alt="Number of Good Offensive/Defensive Players by Team Tier">
+                </div>
+            </br>
+                <h3 class="summary-title">Top 5 teams in particular collect great defenders. The projected top 5 this year in wins (OKC, CLE, HOU, LAC, and ORL) average 7.2 great defenders, compared to 5.4 great offensive players</h3>
+            </div>
+        </section>
+        
         <footer class="text-center text-sm text-gray-500 mt-4">
             <p>Data analysis based on player salaries and WAR (Wins Above Replacement).</p>
         </footer>
@@ -278,3 +332,7 @@
 
 </body>
 </html>
+
+
+
+
